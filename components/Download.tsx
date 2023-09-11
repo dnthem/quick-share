@@ -85,9 +85,15 @@ function Download({ id }: { id: string }) {
       }
 
     };
-    getImage();
+    if (id)
+      getImage();
+
     return () => {
       setImage(null);
+      setImageType(null);
+      setImageName('');
+      setError('');
+      setLoading(false);
     }
   }
     , [id]);
@@ -112,6 +118,8 @@ function Download({ id }: { id: string }) {
 
       {
         !image &&
+        <div className="flex flex-col items-center justify-center rounded-xl bg-primary w-[400px] h-[400px]">
+          <h2 className="text-white p-4 text-xl ">Enter your image ID</h2>
         <form 
         onSubmit={handleSubmit} 
         className="flex flex-col items-center justify-center">
@@ -128,6 +136,7 @@ function Download({ id }: { id: string }) {
             >Submit</button>
           </div>
         </form> 
+        </div>
       }
     </div>
         )
