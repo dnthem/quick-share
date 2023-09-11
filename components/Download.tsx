@@ -37,12 +37,15 @@ function ShowImage({ image, imageType, imageName }: ShowImageProps) {
 
 
 function Download({ id }: { id: string }) {
+  const [Loading, setLoading] = useState<boolean>(false);
   const [imageName, setImageName] = useState<string>('');
   const [image, setImage] = useState<string | null>(null);
   const [imageType, setImageType] = useState<string | null>(null); // ['png', 'jpg', 'jpeg'
   const [error, setError] = useState<string>('');
   const [inputText, setInputText] = useState<string>('');
+  
   const router = useRouter();
+
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,6 +59,7 @@ function Download({ id }: { id: string }) {
   useEffect(() => {
     const getImage = async () => {
       try {
+        setLoading(true);
         const res = await fetch(`/api/download/?id=${id}`, {
           method: 'GET'
         });
@@ -76,6 +80,8 @@ function Download({ id }: { id: string }) {
         if (err instanceof Error) {
           setError(err.message);
         }
+      } finally {
+        setLoading(false);
       }
 
     };
@@ -88,7 +94,10 @@ function Download({ id }: { id: string }) {
 
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <>
+      {
+        Loading ? (<p className="text-blue-500">Loading...</p>) : (
+          <div className="flex flex-col items-center justify-center min-h-screen">
       {image && imageType && imageName && 
       <ShowImage
         image={image}
@@ -121,6 +130,11 @@ function Download({ id }: { id: string }) {
         </form> 
       }
     </div>
+        )
+      }
+    
+    </>
+    
 
   )
 }
