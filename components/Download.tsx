@@ -11,6 +11,7 @@ type ShowImageProps = {
   imageName?: string
 }
 
+
 function ShowImage({ image, imageType, imageName }: ShowImageProps) {
 
   return (
@@ -88,11 +89,13 @@ function Download({ id }: { id: string }) {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      {image && imageType && imageName && <ShowImage
+      {image && imageType && imageName && 
+      <ShowImage
         image={image}
         imageType={imageType}
         imageName={imageName}
-      />}
+      />
+      }
 
       {
         error && <p className="text-red-500">{error}</p>

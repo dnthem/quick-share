@@ -15,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body className='relative' suppressHydrationWarning={true}>
       <header
-        className="bg-primary flex flex-col items-center justify-center text-center"
+        className="bg-primary flex flex-col items-center justify-center text-center pt-4"
       >
         <h1 className="text-4xl font-bold text-white">QuickShare</h1>
       </header>
