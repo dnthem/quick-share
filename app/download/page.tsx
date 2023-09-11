@@ -14,9 +14,7 @@ function DownloadPage( {searchParams}: any) {
         className='text-4xl font-bold text-center mt-8 mb-4'
       >Download</h1>
       <Link href="/" className="text-blue-500 hover:underline" >Back to home</Link>
-      <Suspense fallback={<Loading />}>
-        <Download id={searchParams.id}/>
-      </Suspense>
+      <Download id={searchParams.id}/>
     </main>
   )
 }
