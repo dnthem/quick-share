@@ -4,7 +4,7 @@ declare global {
   var mongoose: any
 }
 
-const MONGODB_URI ="mongodb://localhost:27017/nextjs";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/nextjs";
 
 if (!MONGODB_URI) {
   throw new Error(
