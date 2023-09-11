@@ -2,11 +2,6 @@ import React, { Suspense } from 'react'
 import { Download } from '@/components'
 import Link from 'next/link'
 
-
-function Loading() {
-  return <p>🌀 Loading...</p>
-}
-
 function DownloadPage( {searchParams}: any) {
   return (
     <main className="flex flex-col items-center">
