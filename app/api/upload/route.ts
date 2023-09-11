@@ -43,7 +43,8 @@ export async function POST(req: Request) {
   const bytes = await file.arrayBuffer();
   const bufferBase64 = Buffer.from(bytes).toString('base64');
 
-  if(bytes.byteLength > 1000000) {
+
+  if(bytes.byteLength > 10_000_000) { // 10mb
     resMsg.error = 'Image too large';
     return NextResponse.json(resMsg, { status: 413 });
   }
@@ -68,28 +69,4 @@ export async function POST(req: Request) {
     resMsg.error = `Error: ${e}`;
     return NextResponse.json(resMsg, { status: 500 });
   }
-
-  // if (!image) {
-  //   return new Response('No image provided', { status: 400 });
-  // }
-  // const imageBuffer = await image.arrayBuffer();
-  // const imageBase64 = Buffer.from(imageBuffer).toString('base64');
-
-  // const imageObject : IImages = await new myImage({
-  //   filename: image.name,
-  //   image: imageBase64,
-  // });
-  // try {
-  //   await insertImage(imageObject);
-
-  //   if (imageBuffer.byteLength > 1000000) {
-  //     return new Response('Image too large', { status: 413 });
-  //   } else {
-  //     return new Response(`Image uploaded: ${imageBase64}`, { status: 200 });
-  //   }
-  // } catch (e) {
-  //   return new Response(`Error: ${e}`, { status: 500 });
-  // }
-
-
 }

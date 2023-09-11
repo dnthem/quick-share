@@ -1,2 +1,35 @@
-export const randomWords = ["apple", "banana", "cat", "dog", "elephant", "flower", "guitar", "house", "ice cream", "jacket", "kite", "lemon", "mountain", "notebook", "orange", "pencil", "quilt", "rabbit", "sun", "tree", "umbrella", "violin", "watermelon", "xylophone", "zebra", "beach", "cloud", "dolphin", "fire", "grape", "honey", "island", "jungle", "koala", "lighthouse", "moon", "noodle", "ocean", "penguin", "quokka", "rainbow", "star", "tiger", "unicorn", "volcano", "waterfall", "xylophone", "yacht", "zeppelin", "astronaut", "butterfly", "caterpillar", "dragonfly", "elephant", "flamingo", "giraffe", "hedgehog", "iguana", "jellyfish", "kangaroo", "lemur", "meerkat", "narwhal", "octopus", "panda", "quail", "rhinoceros", "scorpion", "turtle", "urchin", "vulture", "whale", "x-ray fish", "yak", "zebra", "acoustic", "ballet", "camera", "dancer", "electric", "flute", "guitar", "harmony", "instrument", "jazz", "keyboard", "lyrics", "musician", "notation", "opera", "piano", "quartet", "rhythm", "saxophone", "trumpet", "ukulele", "violin", "waltz", "xylophone", "yodel", "zither", "ancient", "book", "cave", "dinosaur", "egypt", "fossil", "history", "invention", "jungle", "kingdom", "laboratory", "mummy", "newspaper", "oasis", "pyramid", "queen", "ruins", "sphinx", "treasure", "underground", "volcano", "world", "xylophone", "yesterday", "zodiac"];
-
+// create a list of 300 unique words
+export const randomWords = [
+  "apple", "breeze", "crystal", "dolphin", "elephant",
+  "fountain", "glimmer", "harbor", "illusion", "jazz",
+  "kite", "luminous", "mountain", "novel", "ocean",
+  "piano", "quartz", "rainbow", "sapphire", "tango",
+  "umbrella", "violin", "whimsical", "xylophone", "yacht",
+  "zebra", "asteroid", "ballet", "cosmic", "drizzle",
+  "emerald", "flamingo", "galaxy", "harp", "icicle",
+  "jungle", "kangaroo", "lilac", "mystic", "nirvana",
+  "opal", "prism", "quiver", "rose", "stardust",
+  "tulip", "unicorn", "vortex", "willow", "xenon",
+  "yellow", "zenith", "azure", "blizzard", "carnival",
+  "dune", "echo", "flute", "gem", "horizon",
+  "iris", "jewel", "kaleidoscope", "lotus", "mirage",
+  "nebula", "orchid", "phoenix", "quasar", "rhapsody",
+  "sunset", "tornado", "utopia", "vivid", "whirlwind",
+  "xanadu", "yearning", "zephyr", "arcane", "butterfly",
+  "celestial", "dream", "eternal", "feather", "glow",
+  "haven", "infinity", "joy", "kingdom", "lunar",
+  "magnetism", "nightfall", "oasis", "pulse", "quintessence",
+  "rune", "serenity", "twilight", "universe", "vibrant",
+  "windchime", "exquisite", "yonder", "zodiac", "alchemy",
+  "blossom", "clarity", "dazzle", "enigma", "flutter",
+  "glisten", "hallow", "incandescent", "jade", "karma",
+  "labyrinth", "moonlight", "nexus", "obelisk", "passion",
+  "quest", "reverie", "shimmer", "tranquil", "uplift",
+  "voyage", "wanderlust", "expanse", "yoga", "zen",
+  "aurora", "borealis", "cascade", "daydream", "ethereal",
+  "fable", "gale", "harmony", "illuminate", "jubilee",
+  "knoll", "lagoon", "murmur", "nymph", "obsidian",
+  "paradise", "quixotic", "radiance", "silhouette", "tempest",
+  "undulate", "verve", "whisper", "xenial", "yarn",
+  "zelig", "atlantis", "brilliance", "chimera", "delta"
+];

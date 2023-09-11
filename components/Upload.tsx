@@ -12,6 +12,7 @@ function Upload({setImageID} : UploadProps) {
   const [image, setImage] = useState<File | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [expireDate, setExpireDate] = useState<string>('');
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -30,6 +31,7 @@ function Upload({setImageID} : UploadProps) {
     try {
       const body = new FormData();
       body.append('image', image);
+      body.append('expireDate', expireDate);
   
       const res = await fetch('/api/upload', {
         method: 'POST',
@@ -59,7 +61,14 @@ function Upload({setImageID} : UploadProps) {
      onSubmit={handleSubmit}
      className="flex flex-col items-center justify-center">
       <input type="file" name="image" accept="image/*"  onChange={handleFileChange}/>
-      
+      <div>
+        <label className="text-black">Expire date: </label>
+        <select value={expireDate} onChange={(e) => setExpireDate(e.target.value)}>
+          <option value="1">1 day</option>
+          <option value="2">2 days</option>
+          <option value="3">3 days</option>
+        </select>
+      </div>
       <button 
         type='submit' 
         className="bg-secondary text-white px-4 py-2 rounded-md mt-4 hover:bg-primary">
@@ -68,7 +77,7 @@ function Upload({setImageID} : UploadProps) {
 
       {message && <p className="text-green-500">{message}</p>}
       {error && <p className="text-red-500">{error}</p>}
-      
+
     </form>
   )
 }

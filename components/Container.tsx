@@ -11,7 +11,7 @@ function Container({ image }: ContainerProps) {
   const [imageID, setImageID] = useState<string | null>(null);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const handleClick = () => {
-    navigator.clipboard.writeText(`${window.location.href}/download/?id=${imageID}`);
+    navigator.clipboard.writeText(`${window.location.href}/download?id=${imageID}`);
     setIsClicked(true);
   }
   return (
@@ -31,7 +31,7 @@ function Container({ image }: ContainerProps) {
           or click this link to copy: &nbsp;
           <span onClick={handleClick} 
           className="text-blue-500 hover:underline cursor-pointer">
-            {`${window.location.href}download/?id=${imageID}`}
+            {`${window.location.href}download?id=${imageID}`}
           </span>
           <br/>
           {

@@ -14,8 +14,6 @@ export function convertBytesToMB(bytes: number | undefined): number {
   return parseFloat((bytes / 1000000).toFixed(2));
 }
 
-
-
 /**
  * Generates a random string from three random words
  * @returns 
