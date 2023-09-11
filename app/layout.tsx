@@ -24,7 +24,7 @@ export default function RootLayout({
           <p className="text-white">
             Made with ❤️ by{' '}
             <a
-              href="dnthem.netlify.app"
+              href="https://dnthem.netlify.app"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-300 underline"
