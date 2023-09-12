@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Images from "@/lib/models/Images";
 import HashTable from "@/lib/models/HashTable";
 
-export async function POST(req : NextRequest) {
+export async function DELETE(req : NextRequest) {
   const payload = await req.json();
   const { id, password } = payload as { id: string, password: string };
   if (!id || !password) {
