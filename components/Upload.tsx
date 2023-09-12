@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { set } from "mongoose";
+import { Loading } from ".";
 
 type UploadProps = {
   setImageID: React.Dispatch<React.SetStateAction<string | null>>
@@ -13,6 +12,7 @@ function Upload({setImageID} : UploadProps) {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [expireDate, setExpireDate] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -28,7 +28,9 @@ function Upload({setImageID} : UploadProps) {
     if (!image) {
       return alert('Please select an image');
     }
+
     try {
+      setLoading(true);
       const body = new FormData();
       body.append('image', image);
       body.append('expireDate', expireDate);
@@ -50,11 +52,11 @@ function Upload({setImageID} : UploadProps) {
       }
     } catch (error : unknown) {
       if (error instanceof Error) {
-        console.error(error.message);
+        console.log(error);
       }
+    } finally {
+      setLoading(false);
     }
-    
-    
   }
   return (
     <form
@@ -77,6 +79,7 @@ function Upload({setImageID} : UploadProps) {
 
       {message && <p className="text-green-500">{message}</p>}
       {error && <p className="text-red-500">{error}</p>}
+      {loading && <Loading />}
 
     </form>
   )
