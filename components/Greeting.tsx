@@ -11,9 +11,9 @@ function Greeting() {
         <li>Get a quick link to share instantly.</li>
       </ol>
       <p>Quick, simple, and free!</p>
-      <p>QuickShare is a free service, and we do not responsible for any data privacy.</p>
+      <p>QuickShare is a free service, and we <span className=' capitalize underline text-red-600'>do not </span> responsible for any data privacy or lost.</p>
       <p>Start sharing your world with QuickShare now, and remember to enjoy the journey!</p>
-      <p>📤 Share at your own risk, and happy uploading! 🌟</p>
+      <p className='text-center'>📤 Share at your own risk, and happy uploading! 🌟</p>
     </div>
   )
 }
