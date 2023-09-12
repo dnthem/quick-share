@@ -22,14 +22,14 @@ export default function RootLayout({
         {children}
         <footer className="bg-primary flex flex-col items-center justify-center text-center">
           <p className="text-white">
-            Made with ❤️ by{' '}
+            Made by{' '}
             <a
               href="https://dnthem.netlify.app"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-300 underline"
             >
-              dnthem
+              ThemDang & HoaDo
             </a>
           </p>
         </footer>
