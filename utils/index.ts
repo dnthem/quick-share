@@ -11,7 +11,7 @@ export function convertBytesToMB(bytes: number | undefined): number {
   if (!bytes) {
     return 0;
   }
-  return parseFloat((bytes / 1000000).toFixed(2));
+  return parseFloat((bytes / 1_000_000).toFixed(2));
 }
 
 /**
