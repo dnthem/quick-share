@@ -4,29 +4,30 @@ import { convertBytesToMB } from "@/utils";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation"
+import { IImages } from "@/lib/models/Images";
 
 type ShowImageProps = {
-  image?: string,
-  imageType?: string,
-  imageName?: string
+  image: string,
+  type: string,
+  filename: string,
+  size: number
 }
 
 
-function ShowImage({ image, imageType, imageName }: ShowImageProps) {
-
+function ShowImage({ image, type, filename, size }: ShowImageProps) {
   return (
     <div>
-      <Image onContextMenu={(e) => {e.preventDefault()}} src={`data:${imageType};base64, ${image}`} alt={imageName || 'image'} width={400} height={400} className="object-contain" />
+      <Image onContextMenu={(e) => { e.preventDefault() }} src={`data:${type};base64, ${image}`} alt={`${filename}` || 'image'} width={400} height={400} className="object-contain" />
       <div className="bottom-0 bg-white text-center w-full">
         <p>
-          Type: {imageType}<br />
-          Name: {imageName}<br />
-          Size: {convertBytesToMB(image?.length)} mb<br />
+          File name: {filename}<br />
+          Type: {type}<br />
+          Size: {size.toString()}mb<br />
           <a
             className="text-blue-500 hover:underline text-4xl"
-            href={`data:${imageType};base64, ${image}`}
-            download={`${imageName}.${imageType}`}>
-            Download
+            href={`data:${type};base64, ${image}`}
+            download={`${filename}.${type}`}>
+            👉Download👈
           </a>
 
         </p>
@@ -38,12 +39,10 @@ function ShowImage({ image, imageType, imageName }: ShowImageProps) {
 
 function Download({ id }: { id: string }) {
   const [Loading, setLoading] = useState<boolean>(false);
-  const [imageName, setImageName] = useState<string>('');
-  const [image, setImage] = useState<string | null>(null);
-  const [imageType, setImageType] = useState<string | null>(null); // ['png', 'jpg', 'jpeg'
+  const [imageInfo, setImageInfo] = useState<IImages | null>(null);
   const [error, setError] = useState<string>('');
   const [inputText, setInputText] = useState<string>('');
-  
+
   const router = useRouter();
 
 
@@ -69,10 +68,8 @@ function Download({ id }: { id: string }) {
           setError(resJSON.error);
           return;
         } else {
-          const imageInfo = resJSON.imageInfo;
-          setImageType(imageInfo.type);
-          setImage(imageInfo.image);
-          setImageName(imageInfo.filename);
+          const imageInfo = resJSON.imageInfo as IImages;
+          setImageInfo(imageInfo);
         }
 
 
@@ -89,9 +86,7 @@ function Download({ id }: { id: string }) {
       getImage();
 
     return () => {
-      setImage(null);
-      setImageType(null);
-      setImageName('');
+      setImageInfo(null);
       setError('');
       setLoading(false);
     }
@@ -104,46 +99,47 @@ function Download({ id }: { id: string }) {
       {
         Loading ? (<p className="text-blue-500">Loading...</p>) : (
           <div className="flex flex-col items-center justify-center min-h-screen">
-      {image && imageType && imageName && 
-      <ShowImage
-        image={image}
-        imageType={imageType}
-        imageName={imageName}
-      />
-      }
+            {imageInfo &&
+              <ShowImage
+                image={imageInfo.image}
+                type={imageInfo.type}
+                filename={imageInfo.filename}
+                size={convertBytesToMB(imageInfo.size)}
+              />
+            }
 
-      {
-        error && <p className="text-red-500">{error}</p>
-      }
+            {
+              error && <p className="text-red-500">{error}</p>
+            }
 
-      {
-        !image &&
-        <div className="flex flex-col items-center justify-center rounded-xl bg-primary w-[400px] h-[400px]">
-          <h2 className="text-white p-4 text-xl ">Enter your image ID</h2>
-        <form 
-        onSubmit={handleSubmit} 
-        className="flex flex-col items-center justify-center">
-          <div className="flex flex-col">
-            <input 
-              type="text" 
-              placeholder="Enter image id" 
-              value={inputText} 
-              onChange={e => setInputText(e.target.value)} 
-              className="border-2 border-gray-300 rounded-md p-2"  
-            />
-            <button type="submit"
-              className="bg-secondary text-white px-4 py-2 rounded-md mt-4 hover:bg-primary"
-            >Submit</button>
+            {
+              !imageInfo &&
+              <div className="flex flex-col items-center justify-center rounded-xl bg-primary w-[400px] h-[400px]">
+                <h2 className="text-white p-4 text-xl ">Enter your image ID</h2>
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-col items-center justify-center">
+                  <div className="flex flex-col">
+                    <input
+                      type="text"
+                      placeholder="Enter image id"
+                      value={inputText}
+                      onChange={e => setInputText(e.target.value)}
+                      className="border-2 border-gray-300 rounded-md p-2"
+                    />
+                    <button type="submit"
+                      className="bg-accent text-white px-4 py-2 rounded-md mt-4 hover:bg-secondary"
+                    >Submit</button>
+                  </div>
+                </form>
+              </div>
+            }
           </div>
-        </form> 
-        </div>
-      }
-    </div>
         )
       }
-    
+
     </>
-    
+
 
   )
 }
