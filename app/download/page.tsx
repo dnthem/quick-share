@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 function DownloadPage( {searchParams}: any) {
   return (
-    <main className="flex flex-col items-center">
+    <main className="flex flex-col items-center min-h-screen">
       <h1
         className='text-4xl font-bold text-center mt-8 mb-4'
       >Download</h1>
