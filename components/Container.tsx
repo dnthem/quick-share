@@ -11,7 +11,7 @@ function Container({ image }: ContainerProps) {
   const [imageID, setImageID] = useState<string | null>(null);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const handleClick = () => {
-    navigator.clipboard.writeText(`${window.location.href}/download?id=${imageID}`);
+    navigator.clipboard.writeText(`${window.location.href}download?id=${imageID}`);
     setIsClicked(true);
   }
   return (
