@@ -59,6 +59,7 @@ export async function POST(req: NextRequest) {
     const newImage = await new myImage({
       filename: getFileName(file.name),
       type: getExtension(file.name),
+      size: file.size,
       image: bufferBase64,
     });
     const savedImage = await newImage.save();

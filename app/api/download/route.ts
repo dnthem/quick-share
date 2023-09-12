@@ -24,28 +24,32 @@ async function getImage(id: string) {
     }
     return res;
   } catch (error) {
-    console.error("Error fetching image:", error);
-    return null;
+    if (error instanceof Error) {
+      throw 'Error: connect to database failed ' + error.message;
+    }
   }
 }
 
 export async function GET(req: NextRequest) {
-
   const { searchParams } = new URL(req.url);
   const imgID = searchParams.get('id');
   const resMsg: responseMessage = {};
-
-  if (!imgID) {
-    resMsg.error = 'No image name provided';
-    return NextResponse.json(resMsg, { status: 400 });
-  }
-
-  const imageInfo = await getImage(imgID);
-  if (!imageInfo) {
-    resMsg.error = 'Image not found';
-    return NextResponse.json(resMsg, { status: 404 });
-  }
-
-  resMsg.imageInfo = imageInfo;
-  return NextResponse.json(resMsg, { status: 200 });
+  try {
+    if (!imgID) {
+      resMsg.error = 'No image name provided';
+      return NextResponse.json(resMsg, { status: 400 });
+    }
+  
+    const imageInfo = await getImage(imgID);
+    if (!imageInfo) {
+      resMsg.error = 'Image not found';
+      return NextResponse.json(resMsg, { status: 404 });
+    }
+  
+    resMsg.imageInfo = imageInfo;
+    return NextResponse.json(resMsg, { status: 200 });
+  } catch (error) {
+    resMsg.error = 'Error fetching image: ' + error;
+    return NextResponse.json(resMsg, { status: 500 });
+  }  
 }
