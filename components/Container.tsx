@@ -23,7 +23,7 @@ function Container({ image }: ContainerProps) {
             Your image is ready to download &nbsp;
             <Link
               className=" text-blue-500 hover:underline"
-              href={`/download/?id=${imageID}`} >
+              href={`download?id=${imageID}`} >
               here
             </Link>
           </span>
