@@ -13,6 +13,7 @@ function Upload({setImageID} : UploadProps) {
   const [error, setError] = useState<string | null>(null);
   const [expireDate, setExpireDate] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [inputMgs, setInputMgs] = useState<string>('');
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -25,15 +26,21 @@ function Upload({setImageID} : UploadProps) {
   const handleSubmit =  async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    if (!image) {
-      return alert('Please select an image');
+    // if (!image) {
+    //   return alert('Please select an image');
+    // }
+
+    if (!inputMgs) {
+      return alert('Please enter a message');
     }
 
     try {
       setLoading(true);
       const body = new FormData();
-      body.append('image', image);
-      body.append('expireDate', expireDate);
+      // body.append('image', image);
+      // body.append('expireDate', expireDate);
+
+      body.append('message', inputMgs);
   
       const res = await fetch('/api/upload', {
         method: 'POST',
@@ -63,6 +70,16 @@ function Upload({setImageID} : UploadProps) {
      onSubmit={handleSubmit}
      className="flex flex-col items-center justify-center">
       <input type="file" name="image" accept="image/*"  onChange={handleFileChange}/>
+
+      <input 
+        type='text' 
+        name='text' 
+        placeholder='Enter text'
+        className="border-2 border-gray-300 rounded-md px-4 py-2 mt-4" 
+        value={inputMgs}
+        onChange={(e) => setInputMgs(e.target.value)}
+      />
+
       <div>
         <label className="text-black">Expire date: </label>
         <select value={expireDate} onChange={(e) => setExpireDate(e.target.value)}>

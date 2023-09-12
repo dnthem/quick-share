@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/mongodb";
-import myImage, {IImages} from "@/lib/models/Images";
-import HashTable from "@/lib/models/HashTable";
+import myImage, { IImages } from "@/lib/models/Images";
+import HashTable, { IHashTable } from "@/lib/models/HashTable";
 import { NextRequest, NextResponse } from "next/server";
 
 type responseMessage = {
@@ -29,23 +29,46 @@ async function getImage(id: string) {
   }
 }
 
+// export async function GET(req: NextRequest) {
+
+//   const { searchParams } = new URL(req.url);
+//   const imgID = searchParams.get('id');
+//   const resMsg: responseMessage = {};
+
+//   if (!imgID) {
+//     resMsg.error = 'No image name provided';
+//     return NextResponse.json(resMsg, { status: 400 });
+//   }
+
+//   const imageInfo = await getImage(imgID);
+//   if (!imageInfo) {
+//     resMsg.error = 'Image not found';
+//     return NextResponse.json(resMsg, { status: 404 });
+//   }
+
+//   resMsg.imageInfo = imageInfo;
+//   return NextResponse.json(resMsg, { status: 200 });
+// }
+
+
 export async function GET(req: NextRequest) {
-
   const { searchParams } = new URL(req.url);
-  const imgID = searchParams.get('id');
-  const resMsg: responseMessage = {};
+  const hashVal = searchParams.get('id');
+  const resMsg: responseMessage = { message: '', error: '' };
 
-  if (!imgID) {
-    resMsg.error = 'No image name provided';
+  if (!hashVal) {
+    resMsg.error = 'No hash value provided';
     return NextResponse.json(resMsg, { status: 400 });
   }
 
-  const imageInfo = await getImage(imgID);
-  if (!imageInfo) {
-    resMsg.error = 'Image not found';
+  const message = await HashTable.findOne({ key: hashVal }) as unknown as IHashTable;
+
+  if (!message) {
+    resMsg.error = 'Message not found';
     return NextResponse.json(resMsg, { status: 404 });
   }
 
-  resMsg.imageInfo = imageInfo;
+  resMsg.id = message.imageId;
+
   return NextResponse.json(resMsg, { status: 200 });
 }

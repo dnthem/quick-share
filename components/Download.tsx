@@ -70,9 +70,10 @@ function Download({ id }: { id: string }) {
           return;
         } else {
           const imageInfo = resJSON.imageInfo;
-          setImageType(imageInfo.type);
-          setImage(imageInfo.image);
-          setImageName(imageInfo.filename);
+          // setImageType(imageInfo.type);
+          // setImage(imageInfo.image);
+          // setImageName(imageInfo.filename);
+          setImageName(resJSON.id)
         }
 
 
@@ -104,10 +105,10 @@ function Download({ id }: { id: string }) {
       {
         Loading ? (<p className="text-blue-500">Loading...</p>) : (
           <div className="flex flex-col items-center justify-center min-h-screen">
-      {image && imageType && imageName && 
+      {imageName && 
       <ShowImage
-        image={image}
-        imageType={imageType}
+        image={image || ''}
+        imageType={imageType || ''}
         imageName={imageName}
       />
       }
@@ -117,7 +118,7 @@ function Download({ id }: { id: string }) {
       }
 
       {
-        !image &&
+        !imageName &&
         <div className="flex flex-col items-center justify-center rounded-xl bg-primary w-[400px] h-[400px]">
           <h2 className="text-white p-4 text-xl ">Enter your image ID</h2>
         <form 

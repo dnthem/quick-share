@@ -31,50 +31,65 @@ async function insertHashTable(id : string) : Promise<string> {
 }
 
 
-export async function POST(req: NextRequest) {
-  const data = await req.formData();
-  const file: File | null = data.get('image') as unknown as File;
-  let resMsg: responseMessage = { message: '', error: '' };
+// export async function POST(req: NextRequest) {
+//   const data = await req.formData();
+//   const file: File | null = data.get('image') as unknown as File;
+//   let resMsg: responseMessage = { message: '', error: '' };
 
-  if (!file) {
-    resMsg.error = 'No image provided';
-    return NextResponse.json(resMsg, { status: 400 });
-  }
+//   if (!file) {
+//     resMsg.error = 'No image provided';
+//     return NextResponse.json(resMsg, { status: 400 });
+//   }
 
-  if (file.size > 10_000_000) { // 10mb
-    resMsg.error = 'Image too large';
-    return NextResponse.json(resMsg, { status: 400 });
-  }
+//   if (file.size > 10_000_000) { // 10mb
+//     resMsg.error = 'Image too large';
+//     return NextResponse.json(resMsg, { status: 400 });
+//   }
 
-  if (!file.type.startsWith('image/')) {
-    resMsg.error = 'Uploaded file is not an image';
-    return NextResponse.json(resMsg, { status: 400 });
-  }
+//   if (!file.type.startsWith('image/')) {
+//     resMsg.error = 'Uploaded file is not an image';
+//     return NextResponse.json(resMsg, { status: 400 });
+//   }
 
-  const bytes = await file.arrayBuffer();
-  const bufferBase64 = Buffer.from(bytes).toString('base64');
+//   const bytes = await file.arrayBuffer();
+//   const bufferBase64 = Buffer.from(bytes).toString('base64');
 
-  try {
-    await dbConnect();
-    const newImage = await new myImage({
-      filename: getFileName(file.name),
-      type: getExtension(file.name),
-      image: bufferBase64,
-    });
-    const savedImage = await newImage.save();
+//   try {
+//     await dbConnect();
+//     const newImage = await new myImage({
+//       filename: getFileName(file.name),
+//       type: getExtension(file.name),
+//       image: bufferBase64,
+//     });
+//     const savedImage = await newImage.save();
 
-    const hash = await insertHashTable(savedImage._id);
-    if (!hash) {
-      throw new Error('Timeout error');
-    }
-    resMsg.message = `Image uploaded: ${file.name}`;
-    resMsg.id = hash;
-    return NextResponse.json(resMsg, { status: 200 });
-  } catch (e : unknown) {
-    if (e instanceof Error) {
-      resMsg.error = `Error: ${e.message}`;
-      return NextResponse.json(resMsg, { status: 500 });
-    }
+//     const hash = await insertHashTable(savedImage._id);
+//     if (!hash) {
+//       throw new Error('Timeout error');
+//     }
+//     resMsg.message = `Image uploaded: ${file.name}`;
+//     resMsg.id = hash;
+//     return NextResponse.json(resMsg, { status: 200 });
+//   } catch (e : unknown) {
+//     if (e instanceof Error) {
+//       resMsg.error = `Error: ${e.message}`;
+//       return NextResponse.json(resMsg, { status: 500 });
+//     }
     
+//   }
+// }
+
+export async function POST (req: NextRequest) {
+  const body = await req.formData();
+  const message : string = body.get('message') as string;
+  const resMsg: responseMessage = { message: '', error: '' };
+  await dbConnect();
+  const hashval = await insertHashTable(message);
+  if (!hashval) {
+    throw new Error('Timeout error');
   }
+
+  resMsg.message = `Message uploaded: ${message}`;
+  resMsg.id = hashval;
+  return NextResponse.json(resMsg, { status: 200 });
 }
