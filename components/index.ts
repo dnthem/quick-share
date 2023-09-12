@@ -1,10 +1,12 @@
 import Upload from "./Upload";
 import Container from "./Container";
 import Download from "./Download";
-import Hello from "./Hello";
+import Greeting from "./Greeting";
+import Loading from "./Loading";
 export {
   Upload,
   Container,
   Download,
-  Hello
+  Greeting,
+  Loading
 };
