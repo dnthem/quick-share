@@ -1,7 +1,7 @@
 import dbConnect from "@/lib/mongodb";
 import myImage, { IImages } from "@/lib/models/Images";
 import HashTable from "@/lib/models/HashTable";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getExtension, getFileName, getRandomThreeWords } from "@/utils";
 
 type responseMessage = {
@@ -9,7 +9,6 @@ type responseMessage = {
   error?: string;
   id?: string;
 }
-
 
 async function insertHashTable(id : string) : Promise<string> {
   const limit = 1000000;
@@ -31,23 +30,29 @@ async function insertHashTable(id : string) : Promise<string> {
   return randomString;
 }
 
-export async function POST(req: Request) {
+
+export async function POST(req: NextRequest) {
   const data = await req.formData();
   const file: File | null = data.get('image') as unknown as File;
-  let resMsg: responseMessage = {};
+  let resMsg: responseMessage = { message: '', error: '' };
+
   if (!file) {
     resMsg.error = 'No image provided';
     return NextResponse.json(resMsg, { status: 400 });
   }
 
+  if (file.size > 10_000_000) { // 10mb
+    resMsg.error = 'Image too large';
+    return NextResponse.json(resMsg, { status: 400 });
+  }
+
+  if (!file.type.startsWith('image/')) {
+    resMsg.error = 'Uploaded file is not an image';
+    return NextResponse.json(resMsg, { status: 400 });
+  }
+
   const bytes = await file.arrayBuffer();
   const bufferBase64 = Buffer.from(bytes).toString('base64');
-
-
-  if(bytes.byteLength > 10_000_000) { // 10mb
-    resMsg.error = 'Image too large';
-    return NextResponse.json(resMsg, { status: 413 });
-  }
 
   try {
     await dbConnect();
@@ -56,17 +61,20 @@ export async function POST(req: Request) {
       type: getExtension(file.name),
       image: bufferBase64,
     });
-    const res = await newImage.save();
+    const savedImage = await newImage.save();
 
-    const hash = await insertHashTable(res._id);
+    const hash = await insertHashTable(savedImage._id);
     if (!hash) {
       throw new Error('Timeout error');
     }
     resMsg.message = `Image uploaded: ${file.name}`;
     resMsg.id = hash;
     return NextResponse.json(resMsg, { status: 200 });
-  } catch (e) {
-    resMsg.error = `Error: ${e}`;
-    return NextResponse.json(resMsg, { status: 500 });
+  } catch (e : unknown) {
+    if (e instanceof Error) {
+      resMsg.error = `Error: ${e.message}`;
+      return NextResponse.json(resMsg, { status: 500 });
+    }
+    
   }
 }
