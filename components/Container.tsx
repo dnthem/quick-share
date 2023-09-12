@@ -10,10 +10,12 @@ type ContainerProps = {
 function Container({ image }: ContainerProps) {
   const [imageID, setImageID] = useState<string | null>(null);
   const [isClicked, setIsClicked] = useState<boolean>(false);
-  const handleClick = () => {
-    navigator.clipboard.writeText(`${window.location.href}download?id=${imageID}`);
+ 
+  const handleClick = (e :React.MouseEvent<HTMLElement>) => {
+    navigator.clipboard.writeText((e.target as any).innerText);
     setIsClicked(true);
   }
+
   return (
     <div className="bg-white rounded-md p-4 text-center">
       <Upload setImageID={setImageID} />
@@ -32,6 +34,12 @@ function Container({ image }: ContainerProps) {
           <span onClick={handleClick} 
           className="text-blue-500 hover:underline cursor-pointer">
             {`${window.location.href}download?id=${imageID}`}
+          </span>
+          <br/>
+          or click here to save your image id for later: &nbsp;
+          <span onClick={handleClick} 
+          className="text-blue-500 hover:underline cursor-pointer">
+            {imageID}
           </span>
           <br/>
           {
