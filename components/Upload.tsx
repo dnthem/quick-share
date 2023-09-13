@@ -54,7 +54,7 @@ function Upload({setImageID} : UploadProps) {
       }
     } catch (error : unknown) {
       if (error instanceof Error) {
-        console.log(error);
+        setError(error.message);
       }
     } finally {
       setLoading(false);
