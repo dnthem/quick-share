@@ -15,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body className='relative' suppressHydrationWarning={true}>
       <header
-        className="bg-primary flex flex-col items-center justify-center text-center pt-4"
+        className="bg-primary flex flex-col items-center justify-center text-center py-4"
       >
         <h1 className="text-4xl font-bold text-white">QuickShare</h1>
       </header>
@@ -29,8 +29,9 @@ export default function RootLayout({
               rel="noopener noreferrer"
               className="text-blue-300 underline"
             >
-              ThemDang & HoaDo
+              ThemDang
             </a>
+            & Hoa Do
           </p>
         </footer>
       </body>
