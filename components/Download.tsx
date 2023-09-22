@@ -127,6 +127,7 @@ function Download({ id }: { id: string }) {
         <p className="text-blue-500">Loading...</p>
       ) : (
         <div className="flex flex-col items-center justify-center min-h-screen">
+          {error && <p className="text-red-500">{error}!</p>}
           {imageInfo ? (
             <ShowImage
               image={imageInfo.image}
@@ -137,7 +138,7 @@ function Download({ id }: { id: string }) {
           ) : (
             <ImageForm onSubmit={handleImageIdSubmit} />
           )}
-          {error && <p className="text-red-500">{error}</p>}
+          
         </div>
       )}
     </>
