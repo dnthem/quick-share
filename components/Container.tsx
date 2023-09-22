@@ -47,10 +47,6 @@ function Container({ image }: ContainerProps) {
           }
         </>
       }
-
-
-
-
     </div>
   )
 }
