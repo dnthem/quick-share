@@ -31,7 +31,7 @@ async function insertHashTable(id : string) : Promise<string> {
 }
 
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest) : Promise<Response> {
   const data = await req.formData();
   const file: File | null = data.get('image') as unknown as File;
   let resMsg: responseMessage = { message: '', error: '' };
@@ -69,9 +69,7 @@ export async function POST(req: NextRequest) {
     resMsg.id = hash;
     return new Response(JSON.stringify(resMsg), { status: 200 });
   } catch (e : unknown) {
-    if (e instanceof Error) {
-      resMsg.error = `Error: ${e.message}`;
-      return new Response(JSON.stringify(resMsg), { status: 400 });
-    }
+    resMsg.error = e instanceof Error ? e.message : 'Internal server error';
+    return new Response(JSON.stringify(resMsg), { status: 500 });
   }
 }
