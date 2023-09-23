@@ -1,12 +1,12 @@
 import dbConnect from "@/lib/mongodb";
-import myImage, { IImages } from "@/lib/models/Images";
+import myImage from "@/lib/models/Images";
 import HashTable from "@/lib/models/HashTable";
 import { NextRequest, NextResponse } from "next/server";
 import { getExtension, getFileName, getRandomThreeWords } from "@/utils";
 
 type responseMessage = {
-  message?: string;
-  error?: string;
+  message: string;
+  error: string;
   id?: string;
 }
 
