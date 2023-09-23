@@ -4,9 +4,9 @@ import HashTable from "@/lib/models/HashTable";
 import { NextRequest, NextResponse } from "next/server";
 
 type responseMessage = {
-  imageInfo?: IImages;
-  message?: string;
-  error?: string;
+  imageInfo: IImages;
+  message: string;
+  error: string;
   id?: string;
 }
 
@@ -33,7 +33,11 @@ async function getImage(id: string) {
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const imgID = searchParams.get('id');
-  const resMsg: responseMessage = {};
+  const resMsg: responseMessage = {
+    imageInfo: {} as IImages,
+    message: '',
+    error: '',
+  };
   try {
     if (!imgID) {
       resMsg.error = 'No image name provided';
