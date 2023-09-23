@@ -1,7 +1,7 @@
 import dbConnect from "@/lib/mongodb";
 import myImage from "@/lib/models/Images";
 import HashTable from "@/lib/models/HashTable";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { getExtension, getFileName, getRandomThreeWords } from "@/utils";
 
 type responseMessage = {
@@ -37,18 +37,15 @@ export async function POST(req: NextRequest) {
   let resMsg: responseMessage = { message: '', error: '' };
 
   if (!file) {
-    resMsg.error = 'No image provided';
-    return NextResponse.json(resMsg, { status: 400 });
+    throw new Error('No image provided');
   }
 
   if (file.size > 10_000_000) { // 10mb
-    resMsg.error = 'Image too large';
-    return NextResponse.json(resMsg, { status: 400 });
+    throw new Error('Image too large');
   }
 
   if (!file.type.startsWith('image/')) {
-    resMsg.error = 'Uploaded file is not an image';
-    return NextResponse.json(resMsg, { status: 400 });
+    throw new Error('Uploaded file is not an image');
   }
 
   const bytes = await file.arrayBuffer();
@@ -70,12 +67,11 @@ export async function POST(req: NextRequest) {
     }
     resMsg.message = `Image uploaded: ${file.name}`;
     resMsg.id = hash;
-    return NextResponse.json(resMsg, { status: 200 });
+    return new Response(JSON.stringify(resMsg), { status: 200 });
   } catch (e : unknown) {
     if (e instanceof Error) {
       resMsg.error = `Error: ${e.message}`;
-      return NextResponse.json(resMsg, { status: 500 });
+      return new Response(JSON.stringify(resMsg), { status: 400 });
     }
-    
   }
 }
