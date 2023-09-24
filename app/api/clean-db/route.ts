@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import Images from "@/lib/models/Images";
 import HashTable from "@/lib/models/HashTable";
 
-export async function DELETE() {
+export async function GET() {
   try {
     await dbConnect();
     await Images.deleteMany({});
