@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image' 
 function Header() {
   return (
     <header
@@ -9,7 +10,10 @@ function Header() {
         <Link 
          href="/"
          >
-        QuickShare
+          <Image src="/icon.png" width={50} height={50} className='object-contain inline' alt='icon'/> 
+        &nbsp;QuickShare
+        
+        
         </Link>
         </h1>
     </header>
