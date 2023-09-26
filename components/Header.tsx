@@ -10,7 +10,7 @@ function Header() {
         <Link 
          href="/"
          >
-          <Image src="/icon.png" width={50} height={50} className='object-contain inline' alt='icon'/> 
+          <Image src="/icongif.gif" width={50} height={50} className='object-contain inline' alt='icon'/> 
         &nbsp;QuickShare
         
         

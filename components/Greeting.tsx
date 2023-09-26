@@ -13,7 +13,7 @@ function Greeting() {
       <p>Quick, simple, and free!</p>
       <p>Start sharing your world with QuickShare now, and remember to enjoy the journey!</p>
       <p>We are <span className=' capitalize underline text-red-600'>NOT</span> responsible for any data privacy breach and data loss.</p>
-      <p>Please be advised that your images will be removed on every sunday at 1AM.</p>
+      <p>Please be advised that your images will be removed on every Sunday at 1AM.</p>
       <p className='text-center'>📤 Happy Uploading and Sharing! 🌟</p>
     </div>
   )
