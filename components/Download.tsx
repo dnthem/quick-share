@@ -66,7 +66,7 @@ function ImageForm({ onSubmit }: { onSubmit: (id: string) => void }) {
         <div className="flex flex-col">
           <input
             type="text"
-            placeholder="Enter image id"
+            placeholder="dragon-slayer-upgrade"
             value={inputText}
             onChange={e => setInputText(e.target.value)}
             className="border-2 border-gray-300 rounded-md p-2"
