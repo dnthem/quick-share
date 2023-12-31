@@ -1,14 +1,14 @@
 import Upload from "./Upload";
-import Container from "./Container";
-import Download from "./Download";
+import Container from "./UI/Container";
+import DownloadPage from "./DownloadSection";
 import Greeting from "./Greeting";
-import Loading from "./Loading";
+import Loading from "./LoadingIcon";
 import Header from "./Header";
 import Footer from "./Footer";
 export {
   Upload,
   Container,
-  Download,
+  DownloadPage,
   Greeting,
   Loading,
   Header,

@@ -1,3 +1,4 @@
+import { application_version } from '@/constants'
 import React from 'react'
 
 function Greeting() {
@@ -15,6 +16,17 @@ function Greeting() {
       <p>We are <span className=' capitalize underline text-red-600'>NOT</span> responsible for any data privacy breach and data loss.</p>
       <p>Please be advised that your images will be removed on every Sunday at 1AM.</p>
       <p className='text-center'>📤 Happy Uploading and Sharing! 🌟</p>
+      <details className='text-center'>
+        <summary>📝 New Updates: </summary>
+        <p>
+          <span className='font-bold'>Version {application_version}</span>
+          <ul className='list-disc pl-8 text-left'>
+            <li>Fix the error where the message 'error not found' still persists even when the image has been found</li>
+            <li>Add Application version</li>
+            <li>Keeping the search-for-image prompt shown after an image has been found</li>
+          </ul>
+        </p>
+      </details>
     </div>
   )
 }

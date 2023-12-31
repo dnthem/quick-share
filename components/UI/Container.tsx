@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import { Upload } from ".";
+import { Upload } from "..";
 import { useState } from "react";
 type ContainerProps = {
   image?: string

@@ -29,3 +29,7 @@ export function getRandomThreeWords(): string {
   }
   return randomIndices.map(index => randomWords[index]).join('-');
 }
+
+export async function fetcher(...args: Parameters<typeof fetch>) {
+  return fetch(...args).then(res => res.json());
+}

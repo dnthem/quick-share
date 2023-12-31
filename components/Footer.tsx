@@ -1,3 +1,4 @@
+import { application_version } from '@/constants'
 import React from 'react'
 
 function Footer() {
@@ -15,6 +16,9 @@ function Footer() {
         </a>
         &nbsp; & Hoa Do
       </p>
+      <aside>
+        version {application_version}
+      </aside>
     </footer>
   )
 }

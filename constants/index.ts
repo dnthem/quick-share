@@ -1,3 +1,4 @@
+
 // create a list of 300 unique words
 export const randomWords = [
   "apple", "breeze", "crystal", "dolphin", "elephant",
@@ -33,3 +34,5 @@ export const randomWords = [
   "undulate", "verve", "whisper", "xenial", "yarn",
   "zelig", "atlantis", "brilliance", "chimera", "delta"
 ];
+
+export const application_version = "1.1.0";
