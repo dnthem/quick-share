@@ -35,4 +35,4 @@ export const randomWords = [
   "zelig", "atlantis", "brilliance", "chimera", "delta"
 ];
 
-export const application_version = "1.1.0";
+export const application_version = "1.1.1";
