@@ -4,15 +4,15 @@ import { ShowImageProps } from "./DownloadSection";
 
 export function ShowImage({ image, type, filename, size }: ShowImageProps) {
   return (
-    <div>
+    <div className='flex flex-col items-center'>
       <Image
         onContextMenu={(e) => e.preventDefault()}
         src={`data:${type};base64, ${image}`}
         alt={filename || 'image'}
         width={400}
         height={400}
-        className="object-contain" />
-      <div className="bottom-0 bg-white text-center w-full">
+        style={{ objectFit: 'contain' }}/>
+      <div>
         <p>
           File name: {filename}<br />
           Type: {type}<br />

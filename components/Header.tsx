@@ -4,7 +4,7 @@ import Image from 'next/image'
 function Header() {
   return (
     <header
-      className="bg-primary flex flex-col items-center justify-center text-center py-4"
+      className="w-full text-center py-4"
     >
       <h1 className="text-4xl font-bold text-white">
         <Link 

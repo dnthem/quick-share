@@ -68,7 +68,7 @@ function DownloadPage({ id }: { id: string }) {
         filename={imageInfo?.filename}
         size={convertBytesToMB(imageInfo?.size)}
       />}
-      <div className="p-4">
+      <div>
         <ImageForm onSubmit={handleImageIdSubmit} />
       </div>
     </>

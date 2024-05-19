@@ -14,10 +14,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='relative' suppressHydrationWarning={true}>
-      <Header />
-        {children}
-      <Footer />
+      <body className='relative bg-primary flex flex-col h-[100vh]'>
+        <Header />
+        <main className="flex-1 text-center flex flex-col items-center justify-center">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   )

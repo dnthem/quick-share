@@ -1,8 +1,9 @@
 import { Container, Greeting } from '@/components'
 import Link from 'next/link'
+import { Fragment } from 'react'
 export default async function Home() {
   return (
-    <main className="flex flex-col min-h-screen w-full items-center justify-center bg-primary">
+    <Fragment>
       <Greeting />
       <span className="text-white my-5">
         Just here for the download? &#8594;&nbsp;
@@ -12,6 +13,6 @@ export default async function Home() {
         </Link>
       </span>
       <Container />
-    </main>
+    </Fragment>
   )
 }

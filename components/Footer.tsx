@@ -3,7 +3,7 @@ import React from 'react'
 
 function Footer() {
   return (
-    <footer className="bg-primary flex flex-col items-center justify-center text-center">
+    <footer className="w-full text-center">
       <p className="text-white">
         Made by{' '}
         <a
@@ -14,7 +14,14 @@ function Footer() {
         >
           Them Dang
         </a>
-        &nbsp; & Hoa Do
+        &nbsp; & &nbsp;
+        <a
+          href="https://www.linkedin.com/in/hoado52/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-300 underline">
+          Hoa Do
+        </a>
       </p>
       <aside>
         version {application_version}
